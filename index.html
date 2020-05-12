@@ -55,9 +55,14 @@
                 Gone too far? Hold the <strong>right mouse button to zoom back out</strong>.
             </p>
             <canvas id="canvas">
-            <p>Your browser doesn't seem to support the &lt;canvas&gt; tag.
-                Try <a href="http://www.google.com/chrome">Chrome</a> or <a href="http://firefox.com">Firefox</a>.</p>
+                <p>Your browser doesn't seem to support the &lt;canvas&gt; tag.
+                    Try <a href="http://www.google.com/chrome">Chrome</a> or <a href="http://firefox.com">Firefox</a>.</p>
             </canvas>
+            <div id="controls">
+              <button id ="fullScreenButton" class = "btn btn-primary" onclick="goFullScreen();"></button>
+              <a href="index.html" id ="resetButton" class = "btn btn-danger">Reset</a>
+              <a href="#" id = "saveCanvasButton" class = "btn btn-dark" download="image.png" onclick="saveCanvas()">Capture</a>
+            </div>
             <h1 class="mt-5">Like what you see?</h1>
             <p class="lead">
                 <a href="https://github.com/xaos-project/XaoS/releases">Download XaoS</a> for Windows, Mac or Linux
@@ -70,5 +75,19 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script src="xaos.js"></script>
+    <script>
+      function saveCanvas(){
+        saveCanvasButton.download = "image.png";
+        saveCanvasButton.href = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+      }
+      function goFullScreen() {
+        if(canvas.requestFullScreen)    
+        canvas.requestFullScreen();
+        else if(canvas.webkitRequestFullScreen)
+            canvas.webkitRequestFullScreen();
+        else if(canvas.mozRequestFullScreen)
+            canvas.mozRequestFullScreen();
+      }
+    </script>
   </body>
 </html>
